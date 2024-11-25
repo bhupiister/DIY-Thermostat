@@ -1,5 +1,5 @@
 # DIY-Thermostat (Work In Progress)
-A DIY thermostat based on ESP32 - ESPHOME - ESPNOW - HOME ASSISTANT
+A STANDALONE DIY thermostat based on ESP32 - ESPHOME - ESPNOW - HOME ASSISTANT
 
 ![image](https://github.com/user-attachments/assets/f059d706-bf4b-4d2f-9ec4-a9e7adbb557c)
 
@@ -10,7 +10,7 @@ A DIY thermostat based on ESP32 - ESPHOME - ESPNOW - HOME ASSISTANT
 
 For two stage thermostat, we can program the HVAC unit to automatically handle the shifting from stage 1 to stage 2 based on its internal timing. Read the manual of HVAC unit for guide on how to do it. By doing so, we just need to control the `W` output for 2 stage heating.
 
-Master ESP32 should have a hard wired temperature sensor and 4 relays to perform the operation. The on board temperature sensor will ensure that we always have atleast one temperature reading. Master ESP32 will use ESPNOW to get data from remote temperature sensors (slave esp32). Master ESP32 will be connected to Home Assistant to program and configure thermostat. This allows controling HVAC from any local/remote device.
+Master ESP32 should have a hard wired temperature sensor and 4 relays to perform the operation. The on board temperature sensor will ensure that we always have atleast one temperature reading. Master ESP32 will use ESPNOW to get data from remote temperature sensors (slave esp32). Master ESP32 will be connected to Home Assistant to program and configure thermostat. This allows controling HVAC from any local/remote device. The system is stanalone and does not require Home Assistant to be always on.
 
 We will, optionally, use Slave ESP32 with temperature sensor on board. This device can be placed in different rooms and can communicate with Master ESP32 over ESPNOW. Master ESP32 will average out all the temperature readings received and perform the heating/cooling accordingly.
 
