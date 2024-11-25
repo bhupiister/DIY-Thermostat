@@ -1,0 +1,72 @@
+esphome:
+  name: esp32-temprature-1
+  friendly_name: ESP32-Temprature-1
+  platformio_options:
+      build_flags: 
+        - -DREAD_SENSORS_TIMEOUT=5000
+        - -DRESPONSE_TIMEOUT=4000
+# - -DFAKE_DEEP_SLEEP_TIME=1000
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+
+external_components:
+  source:
+    type: git
+    url: https://gitlab.com/ripnetuk-public/espnow/ripnetuk-esphome-easynow.git
+    ref: main
+  refresh: 1min
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "REDACTED"
+
+ota:
+  - platform: esphome
+    password: "REDACTED"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Esp32-Temprature-1"
+    password: "uyufW6xlYQIw"
+
+captive_portal:
+
+i2c:
+  - sda: 21
+    scl: 22
+    scan: true
+    id: bus_a
+
+sensor:
+  - platform: bmp3xx_i2c
+    i2c_id: bus_a
+    temperature:
+      id: "outside_temperature"
+      name: "Outside Temperature"
+      oversampling: 16x
+    pressure:
+      id: "outside_pressure"
+      name: "Outside Pressure"
+    address: 0x77
+    update_interval: 10s
+
+proxy_transmitter:
+  espnow_channel: 11
+  receiver_mac_address: "DC:54:75:EB:D5:EC"
+  deep_sleep_length: 20s  
+  sensors:
+    - sensor: outside_temperature
+      proxy_id: "now_temperature"
+    - sensor: outside_pressure
+      proxy_id: "now_pressure"
