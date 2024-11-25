@@ -1,8 +1,7 @@
 # DIY-Thermostat (Work In Progress)
 A STANDALONE DIY thermostat based on ESP32 - ESPHOME - ESPNOW - HOME ASSISTANT
 
-![image](https://github.com/user-attachments/assets/f059d706-bf4b-4d2f-9ec4-a9e7adbb557c)
-
+![image](https://github.com/user-attachments/assets/2d613e74-fc37-4b2b-af7e-91b413f95aa8)
 
 ***Relay logic is shown in the state diagram. The logic will avoid output of cooling and heating at the same time. It also provides redundancy circuit to some extent, such that C1 has to be in ON condition for entire operation of HVAC. If C1 and C2 is ON, it will start the heating with H/C in OFF state. Heating is choosen to be on the NC state of H/C Relay to cover the case where if the H/C relay has failed operationally, by deafult heat will be ON when ever required. The logic is that one cannot survive without heating in winters, can even cause freezing of pipes.*** 
 
@@ -27,3 +26,7 @@ Slave ESP32 will perform the reading of temperature at fixed interval and go int
 ![image](https://github.com/user-attachments/assets/4225c642-3512-4e4a-81da-58b5c69642f9)
 
 ***YAML files, if uploaded on this repo are work in progress. I will notify of stable release after testing.***
+
+To Do
+1)  Support various algorithms to control heat/cooling
+2)  Support 2 Stage heating logic with customizable options. (Right now HVAC should be programmed to take care of it).
